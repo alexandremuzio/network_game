@@ -1,20 +1,21 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"net"
+	"net/rpc"
+
+	"github.com/alexandremuzio/network_game/api"
 )
 
 func main() {
-	conn, err := net.Dial("tcp", "localhost:8080")
+	client, err := rpc.Dial("tcp", "localhost:1234")
 	if err != nil {
 		panic("Error connecting")
 		// handle error
 	}
-	//conn.Write([]byte("Send message to server\n"))
-	fmt.Fprintf(conn, "Send message to server")
-	status, err := bufio.NewReader(conn).ReadString('\n')
+	args := &api.Args{7, 8}
+	var reply int
+	err = client.Call("Arith.Multiply", args, &reply)
 
-	fmt.Printf("status = %v\n", status)
+	fmt.Println("reply = ", reply)
 }
