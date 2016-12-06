@@ -45,6 +45,7 @@ func (p *NetworkPlayer) DoMove(wg *sync.WaitGroup) {
 	p.input = int(b[0] - 48)
 	fmt.Println("Input received", p.input)
 	if p.input == 208 {
+		fmt.Printf("Player %v has disconnected.\n", p.id)
 		p.Lose()
 	}
 }

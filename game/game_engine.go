@@ -61,6 +61,9 @@ func (ge *GameEngine) Step() {
 	scissors := 0
 
 	for _, player := range ge.players {
+		if !player.stillPlaying {
+			continue
+		}
 		switch player.GetLastInput() {
 		case 1:
 			rock++

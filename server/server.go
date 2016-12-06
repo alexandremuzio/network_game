@@ -46,10 +46,11 @@ const MaxPlayers int = 3
 func main() {
 	fmt.Println("Starting Game Server...")
 
-	service := ":1201"
+	service := "localhost:1201"
 	tcpAddr, err := net.ResolveTCPAddr("tcp", service)
 	checkError(err)
 
+	fmt.Println("Listening on ", tcpAddr)
 	listener, err := net.ListenTCP("tcp", tcpAddr)
 	checkError(err)
 
@@ -70,7 +71,7 @@ func main() {
 
 	//Wait for all players to connect
 	for {
-		fmt.Println(gameEngine.NumPlayers())
+		//fmt.Println(gameEngine.NumPlayers())
 		if gameEngine.NumPlayers() == MaxPlayers {
 			break
 		}
